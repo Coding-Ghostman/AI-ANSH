@@ -11,15 +11,14 @@ module.exports = {
 	invoke: async (context, done) => {
 		const logger = context.logger();
 		let History = context.variable('user.conversationHistory');
-
+		const userMessage = context.properties().userMessage;
 		try {
 			const authenticationProvider =
 				await common.ResourcePrincipalAuthenticationDetailsProvider.builder();
 			const client = new genai.GenerativeAiInferenceClient({
 				authenticationDetailsProvider: authenticationProvider,
 			});
-			const userMessage =
-				context.getUserMessage() || context.properties().userMessage;
+
 			// const configurationFilePath = '~/.oci_dmcc/config';
 			// const configProfile = 'DEFAULT';
 
