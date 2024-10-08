@@ -67,7 +67,7 @@ module.exports = {
 			conversationHistory.storeConversationHistory(
 				context,
 				'USER',
-				userMessage.text
+				userMessage
 			);
 
 			try {
