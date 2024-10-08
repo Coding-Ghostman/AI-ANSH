@@ -5,7 +5,7 @@ const conversationHistory = require('../utils/conversationHistory');
 module.exports = {
 	metadata: {
 		name: 'CUSTOM_Check_GenAi',
-		properties: {},
+		properties: { userMessage: { required: true, type: 'string' } },
 		supportedActions: [],
 	},
 	invoke: async (context, done) => {
@@ -14,9 +14,12 @@ module.exports = {
 
 		try {
 			const authenticationProvider =
-				await common.ResourcePrincipalAuthenticationDetailsProvider.builder().build();
-
-			const userMessage = context.getUserMessage();
+				await common.ResourcePrincipalAuthenticationDetailsProvider.builder();
+			const client = new genai.GenerativeAiInferenceClient({
+				authenticationDetailsProvider: authenticationProvider,
+			});
+			const userMessage =
+				context.getUserMessage() || context.properties().userMessage;
 			// const configurationFilePath = '~/.oci_dmcc/config';
 			// const configProfile = 'DEFAULT';
 
@@ -25,9 +28,6 @@ module.exports = {
 			// 		configurationFilePath,
 			// 		configProfile
 			// 	);
-			const client = new genai.GenerativeAiInferenceClient({
-				authenticationDetailsProvider: authenticationProvider,
-			});
 
 			const compartmentId =
 				'ocid1.tenancy.oc1..aaaaaaaahqvb2kliqi35z57qalhpr4dyqbjprclszdcoar2wgc7q6nl36aba';
