@@ -5,12 +5,7 @@ const conversationHistory = require('../utils/conversationHistory');
 module.exports = {
 	metadata: {
 		name: 'CUSTOM_Check_GenAi',
-		properties: {
-			userMessage: {
-				type: 'string',
-				description: 'User message',
-			},
-		},
+		properties: {},
 		supportedActions: [],
 	},
 	invoke: async (context, done) => {
