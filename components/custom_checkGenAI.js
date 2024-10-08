@@ -122,7 +122,7 @@ module.exports = {
 
 				logger.info('CUSTOM_Check_GenAi: ', chatDetails);
 				const chatResponse = await client.chat({ chatDetails: chatDetails });
-
+				logger.info('Chat Response: ', JSON.stringify(chatResponse));
 				conversationHistory.storeConversationHistory(
 					context,
 					'CHATBOT',
